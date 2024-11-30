@@ -21,20 +21,20 @@ spec:
     - name: source
 
 ---
-# apiVersion: tekton.dev/v1beta1
-# kind: Task
-# metadata:
-#   name: build-app
-# spec:
-#   steps:
-#     - name: build
-#       image: maven:3.8.5-openjdk-11
-#       workingDir: /workspace/source
-#       script: |
-#         #!/bin/sh
-#         mvn clean package
-#   workspaces:
-#     - name: source
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-app
+spec:
+  steps:
+    - name: build
+      image: maven:3.8.5-openjdk-11
+      workingDir: /workspace/source
+      script: |
+        #!/bin/sh
+        mvn clean package
+  workspaces:
+    - name: source
 
 ---
 apiVersion: tekton.dev/v1beta1
