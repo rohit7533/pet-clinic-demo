@@ -64,7 +64,7 @@ spec:
     #     echo $DOCKER_PASSWORD | docker login idpdeveacr.azurecr.io -u $DOCKER_USERNAME  -p $DOCKER_PASSWORD
     #     docker push $(params.image)
       env:
-      - name: REGISTRY_AUTH_FILE
+        - name: REGISTRY_AUTH_FILE
           value: /workspace/registry-auth/auth.json
       # - name: DOCKER_USERNAME
       #   valueFrom:
