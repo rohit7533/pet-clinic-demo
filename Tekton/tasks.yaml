@@ -84,7 +84,6 @@ spec:
       type: string
   workspaces:
     - name: source
-      workspace: shared-workspace
   volumes:
     - name: registry-auth-volume
       secret:
@@ -120,4 +119,3 @@ spec:
     #   type: string
   workspaces:
     - name: source
-      workspace: shared-workspace
