@@ -54,7 +54,7 @@ spec:
       image: quay.io/buildah/stable:latest
       script: |
         #!/bin/sh
-        buildah bud --authfile /workspace/registry-auth/auth.json --file /workspace/source/dockerfile --context=/workspace/source -t $(params.image) 
+        buildah bud --file /workspace/source/dockerfile -t $(params.image) 
         buildah push --authfile /workspace/registry-auth/auth.json $(params.image)
     # - name: docker-build
     #   image: docker:20.10.8
@@ -63,9 +63,9 @@ spec:
     #     docker build -t $(params.image) .
     #     echo $DOCKER_PASSWORD | docker login idpdeveacr.azurecr.io -u $DOCKER_USERNAME  -p $DOCKER_PASSWORD
     #     docker push $(params.image)
-      env:
-        - name: REGISTRY_AUTH_FILE
-          value: /workspace/registry-auth/auth.json
+      # env:
+      #   - name: registry-auth-volume
+      #     value: /workspace/registry-auth/auth.json
       # - name: DOCKER_USERNAME
       #   valueFrom:
       #     secretKeyRef:
