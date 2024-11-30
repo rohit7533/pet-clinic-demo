@@ -12,7 +12,7 @@ spec:
     - name: image
       value: "idpdeveacr.azurecr.io/pet-clinic-demo:latest"
     - name: deployment_manifest
-      value: "k8s/springboot-deploy.yaml"
+      value: "/workspace/source/k8s/springboot-deploy.yaml"
     # - name: helm_chart
     #   value: "charts/springboot"
     - name: namespace
