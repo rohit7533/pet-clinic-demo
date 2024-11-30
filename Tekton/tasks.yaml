@@ -9,6 +9,10 @@ spec:
       image: alpine/git
       script: |
         #!/bin/sh
+        if [ -d "/workspace/source" ]; then
+          echo "Directory exists, cleaning up..."
+          rm -rf /workspace/source/*
+        fi
         git clone $(params.repo_url) /workspace/source
   params:
     - name: repo_url
