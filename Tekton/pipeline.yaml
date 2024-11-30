@@ -49,6 +49,7 @@ spec:
     - name: deploy-to-aks
       taskRef:
         name: deploy-to-aks
+      serviceAccountName: tekton-sa
       params:
         - name: deployment_manifest
           value: $(params.deployment_manifest)
