@@ -44,30 +44,41 @@ metadata:
   namespace: demo
 spec:
   steps:
-    - name: dind-setup
-      image: docker:20.10.8-dind
+    # - name: dind-setup
+    #   image: docker:20.10.8-dind
+    #   script: |
+    #     #!/bin/sh
+    #     dockerd-entrypoint.sh &
+    #     sleep 5
+    - name: buildah-build
+      image: quay.io/buildah/stable:latest
       script: |
         #!/bin/sh
-        dockerd-entrypoint.sh &
-        sleep 5
-    - name: docker-build
-      image: docker:20.10.8
-      script: |
-        #!/bin/sh
-        docker build -t $(params.image) .
-        echo $DOCKER_PASSWORD | docker login idpdeveacr.azurecr.io -u $DOCKER_USERNAME  -p $DOCKER_PASSWORD
-        docker push $(params.image)
+        buildah bud -t $(params.image) .
+        buildah push $(params.image)
+    # - name: docker-build
+    #   image: docker:20.10.8
+    #   script: |
+    #     #!/bin/sh
+    #     docker build -t $(params.image) .
+    #     echo $DOCKER_PASSWORD | docker login idpdeveacr.azurecr.io -u $DOCKER_USERNAME  -p $DOCKER_PASSWORD
+    #     docker push $(params.image)
       env:
-      - name: DOCKER_USERNAME
-        valueFrom:
-          secretKeyRef:
-            name: docker-registry
-            key: docker-username
-      - name: DOCKER_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: docker-registry
-            key: docker-password
+      - name: REGISTRY_AUTH_FILE
+          value: /workspace/registry-auth/auth.json
+      # - name: DOCKER_USERNAME
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: docker-registry
+      #       key: docker-username
+      # - name: DOCKER_PASSWORD
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: docker-registry
+      #       key: docker-password
+      volumeMounts:
+        - name: registry-auth-volume
+          mountPath: /workspace/registry-auth
   params:
     - name: image
       type: string
