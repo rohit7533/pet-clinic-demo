@@ -60,3 +60,6 @@ spec:
           value: $(params.image)
       runAfter:
         - docker-build-and-push
+      workspaces:
+        - name: source
+          workspace: shared-workspace
