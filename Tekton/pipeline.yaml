@@ -42,7 +42,7 @@ spec:
         - name: image
           value: $(params.image)
       runAfter:
-        - clone-repo
+        - build-app
       workspaces:
         - name: source
           workspace: shared-workspace
