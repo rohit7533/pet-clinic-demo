@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: git-clone
+  namespace: demo
 spec:
   steps:
     - name: clone-repo
@@ -36,6 +37,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: docker-build-and-push
+  namespace: demo
 spec:
   steps:
     - name: docker-build
@@ -67,6 +69,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: deploy-to-aks
+  namespace: demo
 spec:
   steps:
     - name: kubectl-apply

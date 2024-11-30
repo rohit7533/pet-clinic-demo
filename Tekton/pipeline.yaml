@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: springboot-pipeline
+  namespace: demo
 spec:
   params:
     - name: repo_url
