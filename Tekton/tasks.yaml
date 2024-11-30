@@ -29,7 +29,7 @@ metadata:
 spec:
   steps:
     - name: build
-      image: maven:3.8.5-openjdk-11
+      image: maven:3.8.5-openjdk-17
       workingDir: /workspace/source
       script: |
         #!/bin/sh
