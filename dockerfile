@@ -6,7 +6,7 @@ WORKDIR /app
 #RUN mvn clean package
 RUN ls -latr
 # Copy the JAR file to the container
-COPY target/spring-petclinic-*.jar app.jar
+COPY workspace/source/target/spring-petclinic-*.jar app.jar
 
 # Expose port 8080 for the container
 EXPOSE 8080

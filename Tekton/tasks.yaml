@@ -33,7 +33,7 @@ spec:
       workingDir: /workspace/source
       script: |
         #!/bin/sh
-        mvn clean package
+        mvn clean package -DskipTest -Dmaven
   workspaces:
     - name: source
 
@@ -55,10 +55,13 @@ spec:
       image: quay.io/buildah/stable:latest
       script: |
         #!/bin/sh
-        ls -latr
-        ls /workspace/registry-auth
+        ls /workspace -latr
+        echo "checking for registry-auth..."
+        ls /workspace/source -latr
+        echo "checking for registry-auth..."
+        ls /workspace/registry-auth -latr
         buildah bud --file /workspace/source/dockerfile -t $(params.image) 
-        buildah push --authfile /workspace/registry-auth/auth.json $(params.image)
+        buildah push --authfile /workspace/source/registry-auth/auth.json $(params.image)
     # - name: docker-build
     #   image: docker:20.10.8
     #   script: |
@@ -83,7 +86,7 @@ spec:
         privileged: true
       volumeMounts:
         - name: registry-auth-volume
-          mountPath: /workspace/registry-auth
+          mountPath: /workspace/source/registry-auth
   params:
     - name: image
       type: string
