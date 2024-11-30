@@ -45,23 +45,23 @@ spec:
         docker build -t $(params.image) .
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
         docker push $(params.image)
+      env:
+      - name: DOCKER_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: docker-registry
+            key: docker-username
+      - name: DOCKER_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: docker-registry
+            key: docker-password
   params:
     - name: image
       type: string
   workspaces:
     - name: source
-  env:
-    - name: DOCKER_USERNAME
-      valueFrom:
-        secretKeyRef:
-          name: docker-registry
-          key: docker-username
-    - name: DOCKER_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: docker-registry
-          key: docker-password
-
+  
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
