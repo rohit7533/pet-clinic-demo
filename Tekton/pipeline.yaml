@@ -27,14 +27,14 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
-    # - name: build-app
-    #   taskRef:
-    #     name: build-app
-    #   runAfter:
-    #     - clone-repo
-    #   workspaces:
-    #     - name: source
-    #       workspace: shared-workspace
+    - name: build-app
+      taskRef:
+        name: build-app
+      runAfter:
+        - clone-repo
+      workspaces:
+        - name: source
+          workspace: shared-workspace
     - name: docker-build-and-push
       taskRef:
         name: docker-build-and-push
