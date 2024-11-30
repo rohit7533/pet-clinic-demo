@@ -76,6 +76,8 @@ spec:
       #     secretKeyRef:
       #       name: docker-registry
       #       key: docker-password
+      securityContext:
+        privileged: true
       volumeMounts:
         - name: registry-auth-volume
           mountPath: /workspace/registry-auth
