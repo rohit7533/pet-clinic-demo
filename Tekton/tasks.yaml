@@ -44,6 +44,12 @@ metadata:
   namespace: demo
 spec:
   steps:
+    - name: dind-setup
+      image: docker:20.10.8-dind
+      script: |
+        #!/bin/sh
+        dockerd-entrypoint.sh &
+        sleep 5
     - name: docker-build
       image: docker:20.10.8
       script: |
