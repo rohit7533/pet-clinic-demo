@@ -54,8 +54,8 @@ spec:
       image: quay.io/buildah/stable:latest
       script: |
         #!/bin/sh
-        buildah bud -t $(params.image) -f dockerfile
-        buildah push $(params.image)
+        buildah bud --authfile /workspace/registry-auth/auth.json --file /workspace/source/dockerfile --context=/workspace/source -t $(params.image) 
+        buildah push --authfile /workspace/registry-auth/auth.json $(params.image)
     # - name: docker-build
     #   image: docker:20.10.8
     #   script: |
@@ -84,6 +84,7 @@ spec:
       type: string
   workspaces:
     - name: source
+      workspace: shared-workspace
   volumes:
     - name: registry-auth-volume
       secret:
@@ -117,3 +118,6 @@ spec:
     #   type: string
     # - name: image
     #   type: string
+  workspaces:
+    - name: source
+      workspace: shared-workspace
