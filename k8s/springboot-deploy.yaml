@@ -13,6 +13,8 @@ spec:
       labels:
         app: pet-clinic-demo
     spec:
+      imagePullSecrets:
+      - name: registry-auth
       containers:
         - name: pet-clinic-demo
           image: idpdeveacr.azurecr.io/pet-clinic-demo:latest
