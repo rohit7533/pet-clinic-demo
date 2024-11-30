@@ -6,7 +6,7 @@ metadata:
 spec:
   pipelineRef:
     name: springboot-pipeline
-  serviceAccountName: tekton-pipelines-controller
+  serviceAccountName: tekton-sa
   # podTemplate:
   #   serviceAccountName: backstage-sa
   params:
