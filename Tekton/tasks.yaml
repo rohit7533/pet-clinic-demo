@@ -54,7 +54,7 @@ spec:
       image: quay.io/buildah/stable:latest
       script: |
         #!/bin/sh
-        buildah bud -t $(params.image) .
+        buildah bud -t $(params.image) -f dockerfile
         buildah push $(params.image)
     # - name: docker-build
     #   image: docker:20.10.8
