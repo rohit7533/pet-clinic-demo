@@ -55,11 +55,10 @@ spec:
       image: quay.io/buildah/stable:latest
       script: |
         #!/bin/sh
-        ls /workspace -latr
-        echo "checking for registry-auth..."
         ls /workspace/source -latr
         echo "checking for registry-auth..."
-        ls /workspace/registry-auth -latr
+        ls /workspace/source/registry-auth -latr
+        cat /workspace/source/registry-auth/auth.json
         buildah bud --file /workspace/source/dockerfile -t $(params.image) 
         buildah push --authfile /workspace/source/registry-auth/auth.json $(params.image)
     # - name: docker-build
