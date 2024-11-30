@@ -58,7 +58,7 @@ spec:
         ls /workspace/source -latr
         echo "checking for registry-auth..."
         
-        cp /workspace/registry-auth/.dockerconfigjson /tmp/auth.json
+        cp /workspace/source/registry-auth/.dockerconfigjson /tmp/auth.json
         ls /tmp/ -latr
         buildah bud --file /workspace/source/dockerfile -t $(params.image) 
         buildah push --authfile /tmp/auth.json $(params.image)
