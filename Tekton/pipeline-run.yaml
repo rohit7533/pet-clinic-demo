@@ -7,8 +7,8 @@ spec:
   pipelineRef:
     name: springboot-pipeline
   serviceAccountName: backstage-sa
-  podTemplate:
-    serviceAccountName: backstage-sa
+  # podTemplate:
+  #   serviceAccountName: backstage-sa
   params:
     - name: repo_url
       value: "https://github.com/rohit7533/pet-clinic-demo.git"
